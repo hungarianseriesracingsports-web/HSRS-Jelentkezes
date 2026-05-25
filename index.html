@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>HSRS F1 Liga Jelentkezés</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#1e1f22;
+    color:white;
+    margin:0;
+    padding:30px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#2b2d31;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+h1{
+    text-align:center;
+    color:#ff1801;
+}
+
+h2{
+    border-bottom:2px solid #ff1801;
+    padding-bottom:5px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:none;
+    border-radius:8px;
+    background:#404249;
+    color:white;
+}
+
+textarea{
+    resize:vertical;
+    min-height:100px;
+}
+
+.checkbox-group{
+    margin-top:10px;
+}
+
+.checkbox-group label{
+    font-weight:normal;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#ff1801;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#d91400;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏁 HSRS F1 Liga Jelentkezés</h1>
+
+<form onsubmit="event.preventDefault(); kuldes();">
+
+<h2>Személyes adatok</h2>
+
+<label>Név vagy keresztnév</label>
+<input type="text" id="nev" required>
+
+<label>Versenyzői név</label>
+<input type="text" required>
+
+<label>Életkor</label>
+<input type="number" id="kor" min="10" max="99">
+
+<label>Ország</label>
+<input type="text">
+
+<h2>Játékadatok</h2>
+
+<label>Platform</label>
+<select>
+    <option>PC</option>
+    <option>PlayStation</option>
+    <option>Xbox</option>
+</select>
+
+<label>F1 játék verzió</label>
+<input type="text" placeholder="Pl. F1 25">
+
+<label>Irányítóeszköz</label>
+<select>
+    <option>Kormány</option>
+    <option>Kontroller</option>
+</select>
+
+<h2>Tapasztalat</h2>
+
+<label>Voltál már F1 ligában?</label>
+<select>
+    <option>Igen</option>
+    <option>Nem</option>
+</select>
+
+<label>Ha igen, melyikben?</label>
+<input type="text">
+
+<label>Gyorsaságod (1-10)</label>
+<input type="number" min="1" max="10">
+
+<h2>Elérhetőség</h2>
+
+<label>Discord felhasználónév</label>
+<input type="text" required>
+
+<label>Részt tudsz venni a futamok többségén?</label>
+<select>
+    <option>Igen</option>
+    <option>Nem</option>
+</select>
+
+<h2>Miért szeretnél csatlakozni?</h2>
+
+<textarea id="miert"></textarea>
+
+<h2>Nyilatkozat</h2>
+
+<div class="checkbox-group">
+    <label><input type="checkbox" required> Elfogadom a HSRS szabályzatát.</label>
+    <label><input type="checkbox" required> Sportszerűen fogok versenyezni.</label>
+    <label><input type="checkbox" required> Tudomásul veszem a büntetési rendszert.</label>
+</div>
+
+<button type="submit">🏁 Jelentkezés Beküldése</button>
+
+</form>
+
+</div>
+
+
+<script>
+function kuldes() {
+  const webhook = "https://discord.com/api/webhooks/123456789/abcdef...";
+
+  const nev = document.getElementById("nev").value;
+  const kor = document.getElementById("kor").value;
+  const miert = document.getElementById("miert").value;
+
+  fetch(webhook, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      content: `📩 Új jelentkezés!\n👤 Név: ${nev}\n🎂 Kor: ${kor}\n📝 Miért: ${miert}`
+    })
+  });
+
+  alert("Küldve!");
+}
+</script>
+
+</body>
+</html>
